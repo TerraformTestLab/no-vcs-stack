@@ -5,18 +5,19 @@ identity_token "aws" {
 deployment "test-deployment" {
   # import = "true" # required for non vcs backed stacks 
   inputs = {
-    region = "us-west-2"
-    bucket = "demo-terarform-bucket-stack-terraform-test"
-    acl    = "private"
+    region                   = "us-west-2"
+    s3_bucket_name           = "stacks-sujay-test-01-project-no-vcs-stacks"
+    s3_bucket_acl            = "private"
     control_object_ownership = true
-    versioning = {
+    s3_bucket_versioning = {
       enabled = true
     }
     tags = {
-      CanDelete    = "true"
-      Organization = "stacks-sujay-test-01"
-      Project      = "project-no-vcs-stacks"
-      ManagedBy    = "Terraform"
+      "HcpTerraformProject"      = "project-no-vcs-stacks"
+      "HcpTerraformStacks"       = "no-vcs-stack"
+      "HcpTerraformOrganization" = "sujay-test-01"
+      "ManagedBy"                = "HCP Terraform"
+      "CanDelete"                = "true"
     }
     identity_token = identity_token.aws.jwt
     role_arn       = "arn:aws:iam::668081019392:role/stacks-sujay-test-01-project-no-vcs-stacks"
